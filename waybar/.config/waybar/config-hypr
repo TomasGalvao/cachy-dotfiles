@@ -1,0 +1,365 @@
+{
+    // -------------------------------------------------------------------------
+    // Global configuration
+    // -------------------------------------------------------------------------
+
+    "layer": "top",
+
+    "position": "top",
+
+    //"height": 20,
+
+    "margin-left": 10,
+    "margin-bottom": 0,
+    "margin-right": 10,
+
+    "spacing": 5, // Gaps between modules (4px)
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "temperature",
+        "idle_inhibitor"
+    ],
+    "modules-center": [
+        "hyprland/window",
+        "clock#date"
+        //"custom/weather"
+        //"custom/gammastep"
+    ],
+    "modules-right": [
+        "backlight",
+        "custom/storage",
+        "memory",
+        "cpu",
+        "battery",
+        //"pulseaudio",
+        "wireplumber",
+        "tray",
+        "custom/power"
+        
+    ],
+
+
+    // -------------------------------------------------------------------------
+    // Modules
+    // -------------------------------------------------------------------------
+
+    "custom/sp1": {
+        "format": " | ",
+        "tooltip": false
+    },
+    "custom/sp2": {
+        "format": " |",
+        "tooltip": false
+    },
+
+    "clock#1": {
+        "format": " {:%a}",
+        "tooltip": false,
+        "on-click": "gsimplecal"
+    },
+    "clock#2": {
+        "format": " {:%d-%h-%Y}",
+        "tooltip": false,
+        "on-click": "gsimplecal"
+    },
+    "clock#3": {
+        "format": " {:%H:%M:%S %p}",
+        "tooltip": false,
+        "on-click": "gsimplecal"
+    },
+
+    "temperature": {
+        // "thermal-zone": 1,
+        "interval": 4,
+        //"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": " {temperatureC}°C",
+        "format-critical": "  {temperatureC}°C",
+        "format": "{icon}  {temperatureC}°C",
+        "format-icons": ["", "", ""],
+        "max-length": 7,
+        "min-length": 7,
+        "on-click": "xsensors"
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "  {used:0.2f} / {total:0.0f} GB",
+        "on-click": "alacritty -e btop"
+    },
+
+    "battery": {
+        "interval": 2,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "network": {
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format": "",
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
+        "on-click-right": "wl-copy $(ip address show up scope global | grep inet6 | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c6-)",
+        "tooltip-format": " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n",
+        "tooltip-format-wifi": " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}",
+        "interval": 10
+    },
+    "custom/storage": {
+        "format": " {}",
+        "format-alt": "{percentage}% ",
+        "format-alt-click": "click-right",
+        "return-type": "json",
+        "interval": 60,
+        "exec": "~/.config/waybar/modules/storage.sh"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-alt": "{percent}% {icon}",
+        "format-alt-click": "click-right",
+        //"format-icons": ["", ""],
+        "format-icons": ["", ""],
+        "on-scroll-down": "brightnessctl s 5%-",
+        "on-scroll-up": "brightnessctl s +5%"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": "true"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click-right",
+        "interval": 3600,
+        "exec": "curl -s 'https://wttr.in/?format=1'",
+        //"return-type": "json",
+        //"exec": "~/.config/waybar/modules/weather.sh",
+        "exec-if": "ping wttr.in -c1"
+    },
+    "custom/pacman": {
+        "format": "<big>􏆲</big>  {}",
+        "interval": 3600,                     // every hour
+        "exec": "checkupdates | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "alacritty -e 'pikaur'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8,
+        "max-length": 5,
+        "min-length": 3
+    },
+
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "wlogout"
+    },
+
+    "clock": {
+        "format": "  {:%H:%M   %e %b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "today-format": "<b>{}</b>"
+    },
+
+    "clock#date": {
+        "format": "{:%H:%M   %e %b}", // Icon: calendar-alt
+        //"format": "{:%I:%M %p  %A %b %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "today-format": "<b>{}</b>",
+        "on-click": "gsimplecal"
+    },
+
+    "custom/gammastep": {
+      "interval": 5,
+      "return-type": "json",
+      "exec": {
+        "pre": "if unit_status=\"$(systemctl --user is-active gammastep)\"; then\nstatus=\"$unit_status ($(journalctl --user -u gammastep.service -g 'Period: ' | tail -1 | cut -d ':' -f6 | xargs))\"\nelse\nstatus=\"$unit_status\"\nfi",
+        "alt": "${status:-inactive}",
+        "tooltip": "Gammastep is $status",
+      },
+      "format": "{icon}",
+      "format-icons": {
+        "activating": "󰁪 ",
+        "deactivating": "󰁪 ",
+        "inactive": "? ",
+        "active (Night)": " ",
+        "active (Nighttime)": " ",
+        "active (Transition (Night)": " ",
+        "active (Transition (Nighttime)": " ",
+        "active (Day)": " ",
+        "active (Daytime)": " ",
+        "active (Transition (Day)": " ",
+        "active (Transition (Daytime)": " ",
+      },
+      "on-click": "systemctl --user is-active gammastep && systemctl --user stop gammastep || systemctl --user start gammastep",
+    },
+
+    "cpu": {
+        "interval": 1,
+        //"format": " {}%", // Icon: microchip
+        "format": "{max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
+        "max-length": 13,
+        "min-length": 13
+    },
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        },
+        "format": "{name} {windows}",
+        "format-window-separator": " ",
+        "window-rewrite-default": "",
+         "window-rewrite": {
+             // https://www.nerdfonts.com/cheat-sheet and https://fontawesome.com/icons
+             "title<Agenda - Google Sheets .*>": "󱚈",
+             "title<CLIP - .*>": "󰅏",
+             "class<Alacritty>": "",
+             "class<thunar>": "",
+             "class<pavucontrol>": "󰕾",
+             "class<com.github.weclaw1.ImageRoll|nomacs>": "",
+             "class<com.gabm.satty>": "󱣴",
+             "title<(.*[$%#] *)?nvim.*>": "",
+             "title<(.*[$%#] *)?([hb]|nv|radeon)top.*>": "",
+             "class<emote>": "🙂\uFE0E",
+             "class<firefox>": "",
+             "class<floorp>": "",
+             "class<cachy-browser>": "",
+             "class<ArmCord>": "",
+             "title<ArmCord.*>": "",
+             "title<• ArmCord.*>": "°",
+             "title<.1. ArmCord.*>": "¹",
+             "title<.2. ArmCord.*>": "²",
+             "title<.3. ArmCord.*>": "³",
+             "title<.4. ArmCord.*>": "⁴",
+             "title<.5. ArmCord.*>": "⁵",
+             "title<.6. ArmCord.*>": "⁶",
+             "title<.7. ArmCord.*>": "⁷",
+             "title<.8. ArmCord.*>": "⁸",
+             "title<.9. ArmCord.*>": "⁹",
+             "title<.[0-9][0-9]+. ArmCord.*>": "⁺",
+             "title<WhatSie.*>": "",
+             "title<.1. WhatSie.*>": "¹",
+             "title<.2. WhatSie.*>": "²",
+             "title<.3. WhatSie.*>": "³",
+             "title<.4. WhatSie.*>": "⁴",
+             "title<.5. WhatSie.*>": "⁵",
+             "title<.6. WhatSie.*>": "⁶",
+             "title<.7. WhatSie.*>": "⁷",
+             "title<.8. WhatSie.*>": "⁸",
+             "title<.9. WhatSie.*>": "⁹",
+             "title<.[0-9][0-9]+. WhatSie.*>": "⁺",
+             "title<Signal>": "󰍡",
+             "title<(.* - )?(.[0-9]+. )?YouTube.*>": "",
+             "title<.* - Gmail .*>": "󰊫",
+             "class<thunderbird>": "",
+             "class<obsidian>": "󱞁", //"󰍔",
+             "class<ONLYOFFICE Desktop Editors>": "󰈙",
+             "class<ONLYOFFICE Desktop Editors> title<[*].*>": "󰷈",
+             "class<org.pwmt.zathura>": "󰈙",
+             "class<org.pwmt.zathura> title<.*pdf>": "",
+             "class<calibre-.*>": "",
+             "class<org.qbittorrent.qBittorrent>": "",
+             "class<org.kde.kdeconnect.*>": "",
+             "class<blueman-.*>": "",
+             "class<mpv>": "",
+             "class<vlc>": "󰕼",
+             "class<Gimp-.*>": "",
+             "class<steam>": "󰓓", //  for FontAwesome
+             "class<steam> title<Friends List>": "",
+             "class<steam_app_[0-9]+>": "󰮂",
+             "title<Winetricks.*>": "󰡶",
+             "class<lutris>": "︎︎︎︎🦦\uFE0E",
+             "title<Minecraft.? ([0-9]+.[0-9]+.[0-9]+|Launcher)>": "󰍳",
+             "class<(org.yuzu_emu.)?yuzu>": "󰟡",
+             "class<Spotify>": "",
+             "class<jetbrains-idea(-ce)?>": "",
+             "title<Bitwarden>": "",
+             "class<Code>": "󰨞",
+             "class<dev.zed.Zed>": "",
+             "class<com.obsproject.Studio|zoom>": "",
+             "class<io.github.whoozle.android-file-transfer>": "",
+             "class<(Chromium)|(Chrome)>": ""
+         }
+    },
+
+    "hyprland/window": {
+        "max-length": 60,
+        "separate-outputs": true
+    },
+
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        //"format-source": "{volume}% ",
+        //"format-source-muted": "",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "amixer sset Master toggle"
+    },
+
+    "wireplumber": {
+        "on-click": "pavucontrol",
+        "on-click-right": "amixer sset Master toggle 1>/dev/null",
+        //on-click: "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        //on-scroll-down: "${wpctl} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.04+";
+        //on-scroll-up: "${wpctl} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.04-";
+        "format": "<span foreground='#fab387'>{icon}</span>  {volume}%",
+        "format-muted": " ",
+        "format-source": "",
+        "format-source-muted": "",
+        //"format-muted": "<span foreground='#fab387'> </span>",
+        //"format-icons": [ "<span foreground='#fab387'></span>" ]
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": [" ", " ", " "]
+        },
+    },
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 5
+    }
+}
