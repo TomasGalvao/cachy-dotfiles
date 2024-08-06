@@ -36,3 +36,5 @@ alias fastfetch="fastfetch -l arch"
 alias clear="clear && fastfetch"
 
 alias unzip="extract_and_remove"
+
+alias ..="cd .."
