@@ -299,11 +299,12 @@
              "class<Spotify>": "",
              "class<jetbrains-idea(-ce)?>": "",
              "title<Bitwarden>": "",
-             "class<Code>": "󰨞",
+             "title<.* - Visual Studio Code>": "󰨞",
              "class<dev.zed.Zed>": "",
              "class<com.obsproject.Studio|zoom>": "",
              "class<io.github.whoozle.android-file-transfer>": "",
-             "class<(Chromium)|(Chrome)>": ""
+             "class<(Chromium)|(Chrome)>": "",
+             "class<syncthingtray-qt6>": "󰓦"
          }
     },
 
