@@ -7,8 +7,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export QT_QPA_PLATFORMTHEME=qt5ct
-
 export PATH=/home/galvasz/.cargo/bin:$PATH
 
 # Path to your oh-my-zsh installation.
@@ -28,12 +26,17 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf extract)
+plugins=(git fzf extract fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa --icons -F $realPath'
+
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+
 
 # User configuration
 
@@ -77,89 +80,7 @@ bindkey '^H' backward-kill-word
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-#alias open="xdg-open"
-
-
-
-alias update="sudo pikaur -Syu"
-
-
-# Cleanup orphaned packages
-alias cleanup="sudo pacman -Rsn $(pacman -Qtdq)"
-
-# Get the error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
-
-# Recent installed packages
-alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-
-
-alias fzf="fzf --preview 'bat --color=always {}' --preview-window '~3'"
-
-alias ls="exa --icons -F"
-alias ll="exa -l --icons -F"
-
-alias cat="bat --style=auto"
-
-alias install="pikaur -S"
-alias remove="pikaur -R"
-
-alias commit="git add . && git commit -m"
-
-alias nano="micro"
-alias edit="zeditor"
-
-alias dev="cd /home/galvasz/Development"
-
-alias enable="sudo systemctl enable"
-alias start="sudo systemctl start"
-
-alias fastfetch="fastfetch -l arch"
-
-alias clear="clear && fastfetch"
-
-function extract {
-  if [ -z "$1" ]; then
-    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-  else
-    if [ -f $1 ]; then
-      case $1 in
-        *.tar.bz2)   tar xvjf $1    ;;
-        *.tar.gz)    tar xvzf $1    ;;
-        *.tar.xz)    tar xvJf $1    ;;
-        *.lzma)      unlzma $1      ;;
-        *.bz2)       bunzip2 $1     ;;
-        *.rar)       unrar x -ad $1 ;;
-        *.gz)        gunzip $1      ;;
-        *.tar)       tar xvf $1     ;;
-        *.tbz2)      tar xvjf $1    ;;
-        *.tgz)       tar xvzf $1    ;;
-        *.zip)       unzip $1       ;;
-        *.Z)         uncompress $1  ;;
-        *.7z)        7z x $1        ;;
-        *.xz)        unxz $1        ;;
-        *.exe)       cabextract $1  ;;
-        *)           echo "extract: '$1' - unknown archive method" ;;
-      esac
-    else
-      echo "$1 - file does not exist"
-    fi
-  fi
-}
-
-function extract_and_remove {
-  extract $1
-  rm -f $1
-}
-
-alias unzip="extract_and_remove"
-
-
-
-
+source ~/.zsh_aliases
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
