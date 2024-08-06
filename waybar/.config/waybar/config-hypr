@@ -27,11 +27,11 @@
         //"custom/gammastep"
     ],
     "modules-right": [
-        "backlight",
         "custom/storage",
+        "battery",
+        "backlight",
         "memory",
         "cpu",
-        "battery",
         //"pulseaudio",
         "wireplumber",
         "tray",
