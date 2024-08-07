@@ -42,6 +42,12 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+zinit ice from'gh-r' as'program'
+zinit light sei40kr/fast-alias-tips-bin
+zinit light sei40kr/zsh-fast-alias-tips
+
+zinit snippet OMZP::colored-man-pages
+
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
