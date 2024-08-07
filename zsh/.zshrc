@@ -25,8 +25,11 @@ autoload -Uz _zinit
 
 # Keybinds
 bindkey '^H' backward-kill-word
+bindkey '^[[3;5~' kill-word
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 # Add Snippets
 zinit snippet OMZP::git
