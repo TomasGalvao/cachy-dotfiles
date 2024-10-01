@@ -13,8 +13,8 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 alias fzf="fzf --preview 'bat --color=always {}' --preview-window '~3'"
 
-alias ls="exa -l --icons -F"
-alias lsa="exa -la --icons -F"
+alias ls="eza -l --icons -F"
+alias lsa="eza -la --icons -F"
 
 alias cat="bat --style=auto"
 

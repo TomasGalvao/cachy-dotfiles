@@ -263,6 +263,7 @@
              "class<firefox>": "",
              "class<floorp>": "",
              "class<cachy-browser>": "",
+             "class<zen-alpha>": "󰬡",
              "class<ArmCord>": "",
              "title<ArmCord.*>": "",
              "title<• ArmCord.*>": "°",
@@ -318,7 +319,8 @@
              "class<com.obsproject.Studio|zoom>": "",
              "class<io.github.whoozle.android-file-transfer>": "",
              "class<(Chromium)|(Chrome)>": "",
-             "class<syncthingtray-qt6>": "󰓦"
+             "class<syncthingtray-qt6>": "󰓦",
+             "title<Win11.*>": "",
          }
     },
 

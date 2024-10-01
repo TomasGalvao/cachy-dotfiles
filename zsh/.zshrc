@@ -67,8 +67,8 @@ autoload -U compinit && compinit
 zinit cdreplay -q
 
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa --icons --color=always -F $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'exa --icons --color=always -F $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons --color=always -F $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons --color=always -F $realpath'
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
