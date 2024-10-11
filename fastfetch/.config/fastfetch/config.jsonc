@@ -1,46 +1,42 @@
 {
-    "logo": {
-      "type": "small",
-      "width": 70,
-      "preserveAspectRatio": true
+  "logo": {
+    "type": "small",
+    "width": 70,
+    "preserveAspectRatio": true,
+  },
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "modules": [
+    "uptime",
+    "processes",
+    {
+      "type": "wm",
+      "key": "Window Manager",
     },
-    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-    "modules": [
-        "uptime",
-        "processes",
-        {
-            "type": "wm",
-            "key": "Window Manager"
-        },
-        "shell",
-        {
-            "type": "packages",
-            "format": "{all}"
-        },
-        {
-            "type": "cpu",
-            "key": "Temperature",
-            "temp": true,
-            "format": "{temperature}"
-        },
-        {
-            "type": "memory",
-            "key": "RAM"
-        },
-        {
-            "type": "disk",
-            "key": "Disk",
-            "folders": "/"
-        },
-        {
-            "type": "localip",
-            "key": "LAN IP",
-            "showIpv6": true,
-            "showPrefixLen": false
-        },
-        {
-            "type": "publicip",
-            "key": "WAN IP"
-        }
-    ]
+    "shell",
+    {
+      "type": "packages",
+      "format": "{all}",
+    },
+    {
+      "type": "cpu",
+      "key": "Temperature",
+      "temp": true,
+      "format": "{temperature}",
+    },
+    {
+      "type": "memory",
+      "key": "RAM",
+    },
+    {
+      "type": "disk",
+      "key": "Disk",
+      "folders": "/",
+    },
+    {
+      "type": "localip",
+      "key": "LAN IP",
+      "showIpv6": true,
+      "showPrefixLen": false,
+    },
+  ],
 }
