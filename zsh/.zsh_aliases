@@ -18,7 +18,7 @@ alias lsa="eza -la --icons -F"
 
 alias cat="bat --style=auto"
 
-alias install="pikaur -S"
+alias install="pikaur -Sy"
 alias remove="pikaur -R"
 
 alias commit="git add . && git commit -m"
