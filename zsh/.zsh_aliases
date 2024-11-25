@@ -25,6 +25,7 @@ alias commit="git add . && git commit -m"
 
 alias nano="micro"
 alias edit="zeditor"
+alias vim="lvim"
 
 alias dev="cd /home/galvasz/Development"
 

@@ -245,8 +245,8 @@
             "4": [],
             "5": []
         },
-        "format": "{name} {windows}",
-        "format-window-separator": " ",
+        "format": "[  {name}    {windows}  ]",
+        "format-window-separator": "   ",
         "window-rewrite-default": "",
          "window-rewrite": {
              // https://www.nerdfonts.com/cheat-sheet and https://fontawesome.com/icons

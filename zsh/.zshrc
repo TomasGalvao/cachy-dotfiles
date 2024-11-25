@@ -82,7 +82,7 @@ COMPLETION_WAITING_DOTS="true"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Update PATH
-export PATH=/home/galvasz/.cargo/bin:$PATH
+export PATH=/home/galvasz/.local/bin:/home/galvasz/.cargo/bin:$PATH
 
 # Ignore commands that start with spaces and duplicates.
 export HISTCONTROL=ignoreboth
