@@ -47,4 +47,5 @@ alias ..="cd .."
 
 alias sudo="sudo "
 
+alias lg="lazygit"
 alias cad="ssh -p 12034 -L 9999:bulbasaur-2:22 cad16@cluster.di.fct.unl.pt"

@@ -59,6 +59,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-------------------------------Alacritty Borders-------------------------------------------------------
+
 function Sad(line_nr, from, to, fname)
   vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
 end
@@ -80,3 +82,22 @@ vim.cmd([[
    au VimLeavePre * lua IncreasePadding()
   augroup END
 ]])
+
+--------------------------------- Open External Viewers -----------------------------------------------
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  pattern = "*.pdf",
+  callback = function()
+    local filename = vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
+    vim.cmd("silent !atril " .. filename .. " &")
+    vim.cmd("let tobedeleted = bufnr('%') | b# | exe \"bd! \" . tobedeleted")
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
+  callback = function()
+    local filename = vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
+    vim.cmd("silent !swappy " .. filename .. " &")
+    vim.cmd("let tobedeleted = bufnr('%') | b# | exe \"bd! \" . tobedeleted")
+  end,
+})
